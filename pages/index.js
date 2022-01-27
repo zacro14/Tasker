@@ -1,5 +1,8 @@
 import Head from "next/head";
 import TaskItem from "../components/TaskItem";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../redux/todos";
 import {
   Box,
   Button,
@@ -10,9 +13,6 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addTask } from "../redux/todos";
 
 export default function Home() {
   const [task, setTask] = useState("");
