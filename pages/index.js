@@ -1,3 +1,5 @@
+import Head from "next/head";
+import TaskItem from "../components/TaskItem";
 import {
   Box,
   Button,
@@ -5,17 +7,37 @@ import {
   Divider,
   Flex,
   Heading,
-  HStack,
   Input,
-  Stack,
   Text,
-  VStack,
 } from "@chakra-ui/react";
-
-import Head from "next/head";
-import TaskItem from "../components/TaskItem";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../redux/todos";
 
 export default function Home() {
+  const [task, setTask] = useState("");
+  const dispatch = useDispatch();
+  const taskItem = useSelector((state) => state.task);
+
+  const handleChange = (e) => {
+    setTask(e.target.value);
+  };
+
+  const handleaddTask = () => {
+    if (task === "") {
+      return null;
+    } else {
+      dispatch(
+        addTask({
+          id: Math.floor(Math.random() * 1000),
+          task: task,
+          completed: false,
+        })
+      );
+      setTask("");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -38,12 +60,20 @@ export default function Home() {
             <Text>Your best buddy for your tasks </Text>
           </Box>
 
-          <Box pt={"5"}>
-            <Input placeholder="My Todos" colorScheme={"cyan"}></Input>
+          <Box pt={"5"} display={"flex"}>
+            <Input
+              mr={"4"}
+              placeholder="My Todos ...."
+              colorScheme={"cyan"}
+              onChange={(e) => handleChange(e)}
+              value={task}
+            />
+            <Button onClick={handleaddTask}>Submit</Button>
           </Box>
 
-          <TaskItem taskitem={"Go to bed"} />
-          <TaskItem taskitem={"Eating foods at 8 am"} />
+          {taskItem.task?.map((task) => (
+            <TaskItem taskitem={task} key={task.id} />
+          ))}
         </Flex>
       </Container>
     </>
