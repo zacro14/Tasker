@@ -14,9 +14,6 @@ const TaskItem = ({ taskitem }) => {
     dispatch(completedTask(taskitem.id));
   };
 
-  const handleNotCompleted = () => {
-    dispatch();
-  };
   return (
     <>
       <Box
@@ -33,7 +30,7 @@ const TaskItem = ({ taskitem }) => {
       >
         <Box flex={"1"} display={"flex"} alignItems={"center"}>
           {taskitem.completed ? (
-            <CheckIcon mr="3" onClick={handleNotCompleted} />
+            <CheckIcon mr="3" />
           ) : (
             <Checkbox onChange={handleCheckbox} pr={"3"} />
           )}
