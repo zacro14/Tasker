@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { completedTask, removeTask } from "../redux/todos";
 
 const TaskItem = ({ taskitem }) => {
-  console.log(taskitem);
   const dispatch = useDispatch();
 
   const handleRemoveTask = () => {
@@ -13,6 +12,10 @@ const TaskItem = ({ taskitem }) => {
 
   const handleCheckbox = () => {
     dispatch(completedTask(taskitem.id));
+  };
+
+  const handleNotCompleted = () => {
+    dispatch();
   };
   return (
     <>
@@ -30,7 +33,7 @@ const TaskItem = ({ taskitem }) => {
       >
         <Box flex={"1"} display={"flex"} alignItems={"center"}>
           {taskitem.completed ? (
-            <CheckIcon mr="3" />
+            <CheckIcon mr="3" onClick={handleNotCompleted} />
           ) : (
             <Checkbox onChange={handleCheckbox} pr={"3"} />
           )}
