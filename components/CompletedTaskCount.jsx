@@ -1,9 +1,10 @@
 import { Text } from "@chakra-ui/react";
 
-const CompletedTaskCount = ({ task }) => {
+const CompletedTaskCount = ({ completedTask }) => {
+  console.log(completedTask);
   return (
     <>
-      <Text>{task} Completed Task</Text>
+      <Text>({completedTask}) Completed Task</Text>
     </>
   );
 };

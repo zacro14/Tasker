@@ -10,8 +10,10 @@ import {
   Divider,
   Flex,
   Heading,
+  HStack,
   Input,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import Notask from "../components/Notask";
 import Taskcount from "../components/Taskcount";
@@ -41,7 +43,11 @@ export default function Home() {
     }
   };
 
+  const filterdCompletedTask = taskItem.task.filter(
+    (task) => task.completed === true
+  );
   const taskCount = taskItem.task.length;
+  const completedTaskCount = filterdCompletedTask.length;
 
   return (
     <>
@@ -93,10 +99,13 @@ export default function Home() {
             <Notask />
           )}
 
-          <Box>
+          <HStack height={"5"}>
             {taskCount > 0 ? <Taskcount task={taskCount} /> : null}
-            <CompletedTaskCount taskcount={1} />
-          </Box>
+            <Divider orientation={"vertical"} borderColor={"gray.500"} />
+            {filterdCompletedTask.length > 0 ? (
+              <CompletedTaskCount completedTask={completedTaskCount} />
+            ) : null}
+          </HStack>
         </Flex>
       </Container>
     </>
