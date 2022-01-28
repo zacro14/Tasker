@@ -16,8 +16,8 @@ import {
 
 export default function Home() {
   const [task, setTask] = useState("");
-  const dispatch = useDispatch();
   const taskItem = useSelector((state) => state.task);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setTask(e.target.value);
@@ -38,6 +38,7 @@ export default function Home() {
     }
   };
 
+  console.log(taskItem.task.id);
   return (
     <>
       <Head>
@@ -63,17 +64,28 @@ export default function Home() {
           <Box pt={"5"} display={"flex"}>
             <Input
               mr={"4"}
+              variant={"flushed"}
               placeholder="My Todos ...."
               colorScheme={"cyan"}
+              focusBorderColor={"pink.300"}
+              borderBottom={"dashed"}
+              borderBottomColor={"pink.200"}
               onChange={(e) => handleChange(e)}
               value={task}
             />
-            <Button onClick={handleaddTask}>Submit</Button>
+            <Button
+              bgColor={"blue.200"}
+              _hover={{ bgColor: "blue.300" }}
+              onClick={handleaddTask}
+            >
+              Submit
+            </Button>
           </Box>
 
-          {taskItem.task?.map((task) => (
-            <TaskItem taskitem={task} key={task.id} />
-          ))}
+          {taskItem &&
+            taskItem.task.map((task) => (
+              <TaskItem taskitem={task} key={task.id} />
+            ))}
         </Flex>
       </Container>
     </>

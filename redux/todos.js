@@ -21,6 +21,7 @@ const taskSlice = createSlice({
             completed: true,
           };
         }
+        return task;
       });
     },
   },
