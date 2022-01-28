@@ -14,6 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Notask from "../components/Notask";
+import Taskcount from "../components/Taskcount";
 
 export default function Home() {
   const [task, setTask] = useState("");
@@ -38,6 +39,8 @@ export default function Home() {
       setTask("");
     }
   };
+
+  const taskCount = taskItem.task.length;
 
   return (
     <>
@@ -88,6 +91,8 @@ export default function Home() {
           ) : (
             <Notask />
           )}
+
+          <Taskcount task={taskCount} />
         </Flex>
       </Container>
     </>
