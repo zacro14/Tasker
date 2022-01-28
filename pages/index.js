@@ -13,6 +13,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
+import Notask from "../components/Notask";
 
 export default function Home() {
   const [task, setTask] = useState("");
@@ -38,7 +39,6 @@ export default function Home() {
     }
   };
 
-  console.log(taskItem.task.id);
   return (
     <>
       <Head>
@@ -68,7 +68,6 @@ export default function Home() {
               placeholder="My Todos ...."
               colorScheme={"cyan"}
               focusBorderColor={"pink.300"}
-              borderBottom={"dashed"}
               borderBottomColor={"pink.200"}
               onChange={(e) => handleChange(e)}
               value={task}
@@ -82,10 +81,13 @@ export default function Home() {
             </Button>
           </Box>
 
-          {taskItem &&
+          {taskItem.task.length > 0 ? (
             taskItem.task.map((task) => (
               <TaskItem taskitem={task} key={task.id} />
-            ))}
+            ))
+          ) : (
+            <Notask />
+          )}
         </Flex>
       </Container>
     </>
