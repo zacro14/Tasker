@@ -2,7 +2,7 @@ import Head from "next/head";
 import TaskItem from "../components/TaskItem";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask } from "../redux/todos";
+import { addTask, completedTask } from "../redux/todos";
 import {
   Box,
   Button,
@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import Notask from "../components/Notask";
 import Taskcount from "../components/Taskcount";
+import CompletedTaskCount from "../components/CompletedTaskCount";
 
 export default function Home() {
   const [task, setTask] = useState("");
@@ -92,7 +93,10 @@ export default function Home() {
             <Notask />
           )}
 
-          <Taskcount task={taskCount} />
+          <Box>
+            {taskCount > 0 ? <Taskcount task={taskCount} /> : null}
+            <CompletedTaskCount taskcount={1} />
+          </Box>
         </Flex>
       </Container>
     </>
