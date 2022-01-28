@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { Box, Checkbox, Text, Tooltip } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { completedTask, removeTask } from "../redux/todos";
@@ -30,16 +30,18 @@ const TaskItem = ({ taskitem }) => {
       >
         <Box flex={"1"} display={"flex"} alignItems={"center"}>
           {taskitem.completed ? (
-            <CheckIcon mr="3" />
+            <CheckCircleIcon mr="3" color={"green.500"} />
           ) : (
             <Checkbox onChange={handleCheckbox} pr={"3"} />
           )}
 
-          <Text wordBreak={"break-word"}>{taskitem.task}</Text>
+          <Text wordBreak={"break-word"} textTransform={"capitalize"}>
+            {taskitem.task}
+          </Text>
         </Box>
-        <Box>
+        <Box display={"flex"} alignItems={"flex-start"}>
           <Tooltip textTransform={"capitalize"} label={"remove this task"}>
-            <CloseIcon onClick={handleRemoveTask} />
+            <CloseIcon onClick={handleRemoveTask} color={"red.500"} />
           </Tooltip>
         </Box>
       </Box>
